@@ -1,19 +1,33 @@
 import axios from "axios";
 
 /* =========================
-   API INSTANCE
+   API BASE URL
+========================= */
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+
+/* =========================
+   DEFAULT API INSTANCE
+========================= */
+
+const API = axios.create({
+  baseURL: BASE_URL,
+});
+
+export default API;
+
+/* =========================
+   MAIN API INSTANCE
 ========================= */
 
 export const api = axios.create({
 
-  baseURL:
-    "http://localhost:8080",
+  baseURL: BASE_URL,
 
   timeout: 10000,
 
   headers: {
-    "Content-Type":
-      "application/json",
+    "Content-Type": "application/json",
   },
 
 });
@@ -67,8 +81,7 @@ api.interceptors.response.use(
       );
 
       return Promise.reject({
-        message:
-          "Cannot connect to server",
+        message: "Cannot connect to server",
       });
 
     }
